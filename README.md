@@ -4,7 +4,13 @@ Este proyecto esta conectado a Firebase. Utiliza la autenticacion de la misma pa
 
 Los posts son independientes del usuario tras ser creados, pero se crean a nombre de un usuario obligatoriamente.
 
-
+Uso rápido:
+```
+git clone https://github.com/DestroboK/Proyecto-Final-Sistema-Posts-React-Firebase.git
+cd Proyecto-Final-Sistema-Posts-React-Firebase
+npm install
+npm start
+```
 
 ## Te permite registrarte o iniciar sesion. No te preocupes, solo Google puede saber tu contraseña.
 
