@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Home from './componentes/Home';
 import Signin from './componentes/Signin';
+import Posts from './componentes/Posts';
 import { auth } from './firebase';
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
   return (
     <div className="App">
       {user?<Home/>:<Signin/>}
+      <Posts/>
     </div>
   );
 }

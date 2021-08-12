@@ -14,28 +14,5 @@ var firebaseConfig = {
   firebase.initializeApp(firebaseConfig);
 
   export const db = firebase.firestore();
-  const auth = firebase.auth();
-  export{auth};
-  export const crearUsuario= async (usuario, Nombre, Apellido) => {
-    if (!usuario) return;
-
-    const userRef = db.doc(`usuarios/${usuario.uid}`);
-    const snapshot = userRef.get();
-
-    if (!snapshot.exists){
-        const {apellido} = Apellido;
-        const {correo} = usuario;
-        const {nombre} = Nombre;
-
-
-    try{
-        userRef.set({
-            nombre,
-            apellido,
-            correo
-        });
-    }catch(error){
-        console.log('Error creando el usuario', error);
-    }
-    }
-  };
+  export const auth = firebase.auth();
+  
