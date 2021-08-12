@@ -5,13 +5,14 @@ Este proyecto esta conectado a Firebase. Utiliza la autenticacion de la misma pa
 Los posts son independientes del usuario tras ser creados, pero se crean a nombre de un usuario obligatoriamente.
 
 
-### Te permite registrarte o iniciar sesion. No te preocupes, solo Google puede saber tu contraseña.
+
+## Te permite registrarte o iniciar sesion. No te preocupes, solo Google puede saber tu contraseña.
 
 ![Registrate](autenticacion.PNG)
 
-### Puedes ver lo que ha posteado otra gente, registrado o no.
+## Puedes ver lo que ha posteado otra gente, registrado o no.
 
 ![posts](posts.PNG)
 
-### Solo quellos registrados pueden postear.
+## Solo aquellos registrados pueden postear.
 ![creando un post](posteando.PNG)
