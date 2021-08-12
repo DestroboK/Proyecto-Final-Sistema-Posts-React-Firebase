@@ -1,36 +1,34 @@
-import { render } from "@testing-library/react";
-import React, {useState, useEffect, setState} from "react";
+import React, { useEffect, useState } from "react";
 import { db } from '../firebase';
-const Lista = document.getElementById("PostsListados");
-function renderizarPosts(doc){
-    let li = document.createElement('li');
-    let nombre = document.createElement('span');
-    let contenido = document.createElement('span');
+import '../App.css'
 
-    li.setAttribute('data-id', doc.id);
-    nombre.textContent = doc.data().Nombre;
-    contenido.textContent = doc.data().Contenido;
-
-    li.appendChild(nombre);
-    li.appendChild(contenido);
-
-    Lista.appendChild(li);
-}
-
+//Este componente muestra todos los posts pero siempre esta mostrandose, acorde a la asignacion.
 const Posts = () => {
-    db.collection('posts')
+    const [posts, setPosts] = useState([]);
+    const getContacto=()=>{
+        db.collection('posts')
         .get()
         .then(( snapshot ) => {
+            const Posts= [];
             snapshot.forEach( doc => {
+                Posts.push(doc.data());
             })
             console.log(snapshot)
+            setPosts(Posts);
         })
-    return (
-        <div className="posts">
-            <h1>Posts</h1>
-            <ul id="PostsListados">Lista de posts</ul>
-        </div>
-    );
+    }
+    useEffect(()=>{
+        getContacto()
+      },[])
 
+    return (
+
+        <div className="Lista">
+        <h1>Posts</h1>
+        {
+            posts && posts.length>0 && posts.map((item)=><p className="post"><span className="Username">{item.Nombre}</span> dice: {item.Contenido}</p>)
+        }
+        </div>
+    )
 };
 export default Posts;

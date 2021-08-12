@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { db,auth } from '../firebase';
 const Home = () => {
 
@@ -16,12 +16,11 @@ const Home = () => {
         e.preventDefault();
     }
     return(
-        <div>
-            <span className = "UsuarioLogueado" >Actualmente logueado como </span>
+        <div className="Sender">
             <p><button onClick={()=>auth.signOut()}>Cerrar Sesion</button></p>
             <input id="txtContenido"  type="name" placeholder="Contenido de tu post"/>
             <button onClick = {Enviar}>Enviar post</button>
-            <p>Logueaste como ...</p>
+            <p>Si no ve su post inmediatamente, favor reinicie la pagina.</p>
         </div>
     )
 }

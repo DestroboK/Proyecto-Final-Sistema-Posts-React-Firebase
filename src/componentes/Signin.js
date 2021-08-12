@@ -1,7 +1,8 @@
-import { render } from '@testing-library/react';
 import React, { useRef } from 'react'
 import { db,auth } from '../firebase';
-import './Signin.css'
+import '../App.css'
+
+//Este componente controla la funcion de registrarse y loguearse.
 
 const Signin = () => {
     const emailref = useRef(null);
@@ -11,6 +12,7 @@ const Signin = () => {
         var TxtNombre = document.getElementById('TxtNombre').value;
         var TxtApellido = document.getElementById('TxtApellido').value;
         var TxtCorreo = document.getElementById('TxtCorreo').value;
+        var TxtPassword = document.getElementById('TxtContra').value;
         const usuario = {
             nombre: TxtNombre,
             apellido: TxtApellido,
@@ -19,8 +21,8 @@ const Signin = () => {
         e.preventDefault();
         try{
         auth.createUserWithEmailAndPassword(
-            emailref.current.value,
-            passwordref.current.value
+            TxtCorreo,
+            TxtPassword
         ).then(credenciales =>{
             db.collection("usuarios").doc(credenciales.user.uid).set(Object.assign({}, usuario));
         }).then(()=>{
@@ -32,34 +34,43 @@ const Signin = () => {
         }
     }
     const signIn = e => {
-        var Usuario;
         e.preventDefault();
         auth.signInWithEmailAndPassword(
             emailref.current.value,
             passwordref.current.value
-        ).then(credenciales =>{
-            db.collection('usuarios').doc(credenciales.user.uid).get().then(resultado =>{
-                console.log(resultado.data().nombte + ' ' + resultado.data().apellido);
-            })
-        }).catch(err =>{
+        ).catch(err =>{
             console.log(err);
         })
-        return(Usuario);
 
     }
-    return(
-        <div className="signin">
+
+
+
+        return(
+            <div className="GestorDeEntrada">
+            <div className="signup">
+                <form action="">
+                    <h1>Registrate!</h1>
+                    <input id="TxtNombre" type="name" placeholder="Nombre"/>
+                    <input id="TxtApellido" type="lastname" placeholder="Apellido"/>
+                    <input id="TxtCorreo" type="email" placeholder="Correo electrónico"/>
+                    <input id="TxtContra" type="password" placeholder="Contraseña (minimo 6 caracteres)"/>
+                    <button onClick = {signUp}>Enviar datos</button>
+                </form>
+            </div>
+            <div className="separador"></div>
+            <div className="signin">
             <form action="">
-                <h1>Log in</h1>
-                <input id="TxtNombre" type="name" placeholder="Nombre"/>
-                <input id="TxtApellido" type="lastname" placeholder="Apellido"/>
-                <input id="TxtCorreo" ref={emailref} type="email" placeholder="Correo electrónico"/>
+                <h1>o Accede!</h1>
+                <input ref={emailref} type="email" placeholder="Correo electrónico"/>
                 <input ref={passwordref} type="password" placeholder="Contraseña"/>
-                <button onClick = {signIn}>Log in</button>
-                <h6>¿No tienes cuenta? <span onClick={signUp} className="signin__link">Registrate!</span></h6>
+                <button onClick = {signIn}>Acceder</button>
             </form>
-        </div>
-    )
+            </div>
+            <h5>Es necesario acceder para poder postear. Los posts tendran tu nombre y apellido.</h5>
+            </div>
+        
+        )
 }
 
 export default Signin;
